@@ -40,6 +40,7 @@ jobs:
     permissions:
       contents: write
     steps:
+      - uses: actions/checkout@v4 
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
