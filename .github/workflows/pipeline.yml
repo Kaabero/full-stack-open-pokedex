@@ -32,11 +32,11 @@ jobs:
           wait-on: http://localhost:5000
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') }}
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ }}?key=${{ secrets.RENDER_API_KEY }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ }}?key=${{ secrets.RENDER_API_ }}
 
       - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') && success()}}
+        if: ${{ success() }}
         with:
           severity: info
           description: A new version of Pokedex deployed!
@@ -44,7 +44,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') && failure()}}
+        if: ${{ failure() }}
         with:
           severity: error
           description: Build failed, ${{ job.status }}
