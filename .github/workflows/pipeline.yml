@@ -49,7 +49,7 @@ jobs:
         with:
           severity: error
           details: Build failed!
-          text: Build failed!
+          text: Build failed, ${{ job.status }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
             
