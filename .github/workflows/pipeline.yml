@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') }}
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ }}?key=${{ secrets.RENDER_API_KEY }}
 
       - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
@@ -49,7 +49,7 @@ jobs:
           severity: error
           description: Build failed, ${{ job.status }}
           text: Build failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOO }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
             
   tag_release:
