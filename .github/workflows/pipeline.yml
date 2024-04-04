@@ -47,7 +47,7 @@ jobs:
         if: ${{ failure() }}
         with:
           severity: error
-          description: Build failed, ${{ job.status }}
+          description: Build failed, commit https://github.com/${{github.repository}}/commit/${{github.sha}} broke the build..."
           text: Build failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
